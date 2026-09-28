@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ida Tinker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75..100,400..600&family=IBM+Plex+Mono:wght@300;400&display=swap">
+<style>
+  :root{
+    --bg:#ffffff; --ink:#000000; --mute:#8a8a8a; --line:#ececec; --ph:#f2f2f2;
+    --gut:30px; --side:30px;
+    color-scheme:light;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Open Sans",Arial,sans-serif;font-stretch:75%;font-weight:400;
+    font-size:13px;line-height:1.45;
+    padding-inline:var(--side);padding-block:0 40px;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  a:hover{opacity:.55}
+  a:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
+  img{display:block;width:100%;max-width:100%;height:auto}
+
+  .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut)}
+  .c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}.c8{grid-column:span 8}.c12{grid-column:span 12}
+  .o3{grid-column-start:4}
+
+  /* header */
+  header{padding-block:34px 0;font-size:19px;line-height:1.5;align-items:start}
+  header.grid{display:flex;justify-content:space-between;gap:16px}
+  header .right{text-align:right;display:flex;justify-content:flex-end;gap:22px}
+  .intro{font-size:13px;line-height:1.45;padding-block:10px 64px;text-wrap:balance}
+  .intro .c8{max-width:32em}
+
+  /* project rows */
+  :root{--rh:min(400px, calc((100vw - 60px) * .64 / 2.3))}
+  .row{padding-block:0 60px;align-items:start}
+  .strip{grid-column:span 8;display:flex;gap:var(--gut);height:var(--rh);overflow:hidden}
+  .strip img{height:100%;width:auto;max-width:none;flex:none;background:var(--ph)}
+  a.strip:hover{opacity:1}
+  .stack{display:flex;flex-direction:column;gap:var(--gut);height:100%;flex:none}
+  .stack img{height:calc((100% - var(--gut)) / 2)!important}
+  .sq{aspect-ratio:1/1;width:100%;object-fit:cover;background:var(--ph)}
+  .meta h2{font-size:13px;font-weight:500;margin:0}
+  .meta .yr{color:var(--mute);margin:2px 0 14px}
+  .meta p{margin:0;max-width:32em}
+  .row a.media{display:block}
+  .row a.media:hover{opacity:1}
+  .row.link .meta h2::after{content:" →";opacity:0;transition:opacity .2s}
+  .row.link:hover .meta h2::after{opacity:1}
+  .soon{color:var(--mute)}
+
+  /* footer */
+  footer{border-top:1px solid var(--line);padding-block:22px 0;margin-top:20px;font-size:13px}
+  footer .lab{color:var(--mute);display:block;margin-bottom:2px}
+  .clocks{display:flex;gap:28px;justify-content:flex-end;font-variant-numeric:tabular-nums}
+
+  /* about */
+  .about-top{padding-block:0 70px;align-items:start}
+  .portrait{aspect-ratio:4/3;background:var(--ph);display:grid;place-items:center;color:var(--mute)}
+  .bio{font-size:19px;line-height:1.5}
+  .bio p{margin:0 0 22px}
+  .bio .links{display:flex;flex-direction:column;font-size:13px}
+  .cv{padding-block:0 60px;align-items:start}
+  .cv h3{font-size:13px;font-weight:500;margin:0 0 14px}
+  .cv ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+  .cv li span{display:block;color:var(--mute)}
+  .todo{color:var(--mute);font-style:italic}
+
+  /* project detail */
+  .p-head{padding-block:0 50px;align-items:start}
+  .p-head .yr{color:var(--mute)}
+  .p-head p{margin:0;font-size:19px;line-height:1.5}
+  .p-head .go{text-align:right;text-transform:uppercase;letter-spacing:.06em}
+  .blk{padding-block:0 var(--gut);align-items:start}
+  .blk p{margin:0}
+  .blk.txt{padding-block:30px 60px}
+  .next{padding-block:40px 20px;font-size:19px}
+  .blk img,.blk video{display:block;width:100%;height:auto}
+  .panel{background:var(--tint,#F4F2EF);display:flex;justify-content:center;align-items:center;gap:4%;padding:7% 5%}
+  .panel img{width:auto!important;height:auto;max-height:560px;max-width:30%;flex:0 1 auto}
+  .panel.one img{max-width:62%;max-height:620px}
+  .panel video{width:auto!important;height:100%;max-height:100%;border-radius:28px}
+  .sqr{aspect-ratio:1/1;object-fit:cover}
+
+
+  /* personal works: dark, irregular */
+  .personal{background:#1A1A1C;color:#E9E7E2;margin-inline:calc(-1 * var(--side));padding:60px var(--side) 120px;margin-top:40px}
+  .personal .mark{font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:19px;color:#8F8C86;margin-bottom:70px;display:flex;justify-content:space-between}
+  .pw{align-items:start;margin-bottom:110px}
+  .pw .ph{background:#2A2A2D;aspect-ratio:var(--ar,4/3);display:grid;place-items:center;color:#5E5C58;font-family:"IBM Plex Mono",monospace;font-size:12px}
+  .pw img{display:block;width:100%;height:auto}
+  .pw p{font-family:"IBM Plex Mono",ui-monospace,monospace;font-weight:300;font-size:15px;line-height:1.75;letter-spacing:.01em;margin:22px 0 0;max-width:34em}
+  .pw p b{font-weight:400;color:#fff}
+  .pw .side{align-self:end}
+  .pw .side p{margin-top:0}
+  .p1 .m{grid-column:5/12}.p1 .m2{grid-column:2/8;margin-top:50px}
+  .p2 .m{grid-column:2/7}.p2 .side{grid-column:8/12}
+  .p3 .m{grid-column:4/12}
+  .p4 .m{grid-column:1/5}.p4 .m2{grid-column:6/9;margin-top:120px}
+  @media (max-width:820px){
+    .personal{padding-block:40px 60px}
+    .p1 .m,.p2 .m,.p2 .side,.p3 .m,.p4 .m,.p1 .m2,.p4 .m2,.p5 .m,.p5 .side,.p6 .m,.p6 .m2,.p7 .m,.p7 .m2,.p7 .side,.p8 .m,.p8 .m2,.p8 .side,.p9 .m,.p9 .m2,.p10 .m,.p10 .m2,.p10 .side,.p11 .m,.p11 .side,.p12 .m,.p12 .m2,.p12 .m3,.p12 .side{grid-column:1/-1;margin-top:0}
+    .p12 .m2,.p12 .m3{margin-top:18px}
+    .p11 .side{margin-top:18px}
+    .p10 .m2{margin-top:18px}
+    .p9 .m2{margin-top:28px}
+    .p8 .m2{order:3;margin-top:28px}
+    .p8 .side{order:2;margin-top:18px}
+    .p7 .m2{order:3;margin-top:28px}
+    .p7 .side{order:2;margin-top:18px}
+    .p2 .side{margin-top:18px}.pw{margin-bottom:70px}
+  }
+
+  .pulse{position:relative;overflow:hidden}
+  .pulse img{display:block;width:100%;height:auto}
+  .pulse i{position:absolute;left:var(--x);top:var(--y);width:var(--r);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+    background:radial-gradient(circle,rgba(255,226,170,.85) 0%,rgba(255,206,140,.35) 38%,rgba(255,200,140,0) 70%);mix-blend-mode:screen;opacity:0;
+    animation:pulse 3.4s ease-in-out infinite;animation-delay:var(--d,0s);pointer-events:none}
+  @keyframes pulse{0%,100%{opacity:0;transform:translate(-50%,-50%) scale(.92)}45%{opacity:.9;transform:translate(-50%,-50%) scale(1.04)}}
+  @media (prefers-reduced-motion:reduce){.pulse i{animation:none;opacity:.35}}
+  .p5 .m{grid-column:2/7}.p5 .side{grid-column:8/12}
+  .p7 .side{grid-column:1/4;align-self:start}.p7 .m{grid-column:4/13}.p7 .m2{grid-column:2/9;margin-top:60px}
+  .p8 .side{grid-column:3/7;align-self:center}.p8 .m{grid-column:8/12}.p8 .m2{grid-column:2/8;margin-top:40px}
+  .p9 .m{grid-column:2/6}.p9 .m2{grid-column:7/12;margin-top:140px}
+  .p10 .m{grid-column:1/4}.p10 .m2{grid-column:5/13}.p10 .side{grid-column:5/10;margin-top:22px}
+  .p11 .m{grid-column:3/12}.p11 .side{grid-column:3/8;margin-top:22px}
+  .p12 .m{grid-column:1/5}.p12 .m2{grid-column:5/9;margin-top:90px}.p12 .m3{grid-column:9/13;margin-top:30px}.p12 .side{grid-column:5/10;margin-top:26px}
+  .p6 .m{grid-column:1/6}.p6 .m2{grid-column:7/11;margin-top:160px}
+  .blk.intro{padding-block:70px 26px;font-size:13px;line-height:1.45;align-items:baseline}
+  .blk.intro h3{font-size:19px;font-weight:500;margin:0 0 10px}
+  .blk.intro p{margin:0;max-width:34em}
+  .blk.intro .yr{color:var(--mute)}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+  .tags span{font-size:11.5px;line-height:1;padding:6px 10px;border:1px solid #D9D6D0;border-radius:999px;color:var(--ink);background:#fff;white-space:nowrap}
+  .blk .c4>.panel.one{overflow:hidden}
+  .blk .c4>.panel.one img{height:100%!important;max-height:100%!important;width:auto!important;max-width:100%!important;object-fit:contain}
+  .scr{display:inline-block;white-space:nowrap}
+  .sh{display:inline-block;width:.56em;height:.56em;margin:0 .03em;vertical-align:-.02em}
+  .sh1{border-radius:50%}
+  .sh2{clip-path:polygon(50% 0,100% 100%,0 100%)}
+  header a.scr:hover{opacity:1}
+  .cv .ph,.cv .ph span{color:#B4B0AA;font-style:italic}
+  .blk.cs{padding-block:70px 20px;border-top:1px solid var(--line);margin-top:50px}
+  .cs h4{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:500;margin:0 0 10px}
+  .cs p{margin:0;font-size:15px;line-height:1.5;max-width:30em}
+  .view{display:none}
+  .view.on{display:block}
+
+  @media (max-width:820px){
+    :root{--gut:14px;--side:16px}
+    header{font-size:16px;padding-block:20px 0}
+    .intro{font-size:13px;padding-block:8px 40px}
+    .intro .c8,.c8,.c5,.c12{grid-column:1/-1}
+    :root{--rh:calc((100vw - 46px) / 2.3)}
+    .strip{grid-column:1/-1}
+    .row .meta{grid-column:1/-1;padding-top:12px}
+    .row{padding-block:0 44px}
+    .about-top .c4,.cv .c4,.p-head .c3,.p-head .c5{grid-column:1/-1}
+    .about-top .c4,.cv .c4{margin-top:24px}
+    .bio{font-size:16px}
+    .p-head .go{text-align:left;margin-top:12px}
+    .p-head p{font-size:16px}
+    .o3{grid-column:1/-1}.blk .c4{grid-column:span 6}.blk.txt .c4{grid-column:1/-1;margin-bottom:14px}
+    .blk .c3{display:none}
+    .panel img{max-height:320px}
+    .blk.cs .c4{grid-column:1/-1;margin-bottom:22px}
+    .blk.intro{padding-block:44px 18px}.blk.intro .c3{display:block;grid-column:1/-1;order:2;margin-top:8px}.blk.intro .c5{grid-column:1/-1}
+    footer .c4{grid-column:1/-1;margin-bottom:14px}
+    .clocks{justify-content:flex-start}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- ============ HOME ============ -->
+<main id="home" class="view on">
+  <header class="grid">
+    <div class="c8"><a href="#" class="scr" data-t="Ida Tinker">Ida Tinker</a></div>
+    <nav class="c4 right"><a href="#about">About</a><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a></nav>
+  </header>
+  <section class="intro grid">
+    <p class="c8" style="margin:0">Multidisciplinary designer, artist and educator working across London, Barcelona and Istanbul. She co-founded Magna Ventures and is currently working at Journey Fertility.</p>
+  </section>
+
+  <article class="row grid link">
+    <a class="strip" href="#journey-fertility"><img class="gif" src="assets/jf-bento.webp" alt="Journey Fertility brand and product overview"><img src="assets/jf-phone.webp" alt="Journey Fertility hormone test search" style="background:none"></a>
+    <a class="c4 meta" href="#journey-fertility"><h2>Journey Fertility</h2><div class="yr">2025 – Present</div><p>A platform for every part of fertility, from egg freezing and IVF to hormone checks. </p><div class="tags"><span>Research</span><span>Product design</span><span>Brand design</span></div></a>
+  </article>
+
+  <article class="row grid link">
+    <a class="strip" href="#letterbird"><img src="assets/lb-home.jpg" alt="Letterbird welcome screen and calendar of journal pages"><img class="gif" src="assets/lb-calls.webp" alt="Letterbird incoming call and on-call screens, animated"></a>
+    <a class="c4 meta" href="#letterbird"><h2>Letterbird</h2><div class="yr">2026</div><p>A voice journal that works through one call a day. It rings at dusk, asks a few gentle questions and keeps what you say as a page.</p><div class="tags"><span>UI design</span><span>Motion design</span></div></a>
+  </article>
+
+  <article class="row grid link">
+    <a class="strip" href="#oia"><img class="gif" src="assets/oia-face.webp" alt="Oia maps facial features through the phone"><img src="assets/oia-phone2.webp" alt="Oia chat: a patient sends a video note" style="background:none"></a>
+    <a class="c4 meta" href="#oia"><h2>Oia</h2><div class="yr">2025 · heyoia.com</div><p>A luxury AI concierge for cosmetic-treatment journeys. The interface is the agent.</p><div class="tags"><span>Research</span><span>Product design</span><span>Brand design</span></div></a>
+  </article>
+
+  <article class="row grid link">
+    <a class="strip" href="#connectd"><img class="gif" src="assets/con-hero.webp" alt="Connectd homepage: Creating connections, changing futures"><img src="assets/con-messages.jpg" alt="A founder and an advisor messaging on Connectd, on laptop and phone"></a>
+    <a class="c4 meta" href="#connectd"><h2>Connectd</h2><div class="yr">2024 · Sifted 250, #117</div><p>A marketplace matching startups with advisors. It began three-sided; my research led the leadership team to drop investors.</p><div class="tags"><span>Lead product design</span></div></a>
+  </article>
+
+
+  <article class="row grid link">
+    <a class="strip" href="#google-home"><img class="gif" src="assets/gh-owl.webp" alt="Owl speaker skin waking up"><img src="assets/gh-sprout.webp" alt="Sprout speaker skin waking up"></a>
+    <a class="c4 meta" href="#google-home"><h2>Google Home skins</h2><div class="yr">2025 · Google Labs</div><p>Playful skins for Google Home that wake up when you say “Hey Google” and keep moving while music plays.</p><div class="tags"><span>Product design</span><span>Interaction design</span><span>Character design</span></div></a>
+  </article>
+
+  <article class="row grid link">
+    <a class="strip" href="#vccp"><img src="assets/vccp-goodworks.jpg" alt="VCCP Good Works"></a>
+    <a class="c4 meta" href="#vccp"><h2>VCCP Good Works</h2><div class="yr">Vitality · Pension Buddy · Cambridge Building Society</div><p>Accessible health and finance platforms used by millions, across three regulated industries.</p><div class="tags"><span>Senior product design</span><span>Design systems</span><span>Accessibility</span></div></a>
+  </article>
+
+  <article class="row grid link">
+    <a class="strip" href="#experiential"><img src="assets/exp-ibm-cover.jpg" alt="IBM App Connect: Work less, do more"><img class="gif" src="assets/exp.webp" alt="IBM Dreamstore kiosk"></a>
+    <a class="c4 meta" href="#experiential"><h2>Experiential Design</h2><div class="yr">2018 – 2019</div><p>Installations, events and retail experiences for Facebook, Spotify, IBM and Mazda.</p><div class="tags"><span>Experience design</span><span>Interaction design</span></div></a>
+  </article>
+
+  <article class="row grid link">
+    <a class="strip" href="#tinkfabrik"><img src="assets/tf-logo.jpg" alt="Tinkfabrik logo"><img src="assets/tf-feed-top.jpg" alt="Tinkfabrik discovery feed of sustainability challenges"></a>
+    <a class="c4 meta" href="#tinkfabrik"><h2>Tinkfabrik</h2><div class="yr">2011 · Co-founder</div><p>A co-creation platform where designers and FMCG companies solve sustainability challenges together. Runner-up, MIT Business Plan Competition.</p><div class="tags"><span>Co-founder</span><span>Product strategy</span><span>Brand design</span></div></a>
+  </article>
+  <section class="personal" id="personal">
+    <div class="mark"><span>//</span><span>Personal works</span></div>
+    <article class="pw p1 grid"><div class="m"><img src="assets/pw-mum-1.gif" alt="The game finds the player's face and hand through the camera" loading="lazy"><p><b>A game for Mum.</b> I built this for my mum, who has Parkinson's. Hand and face tracking turn her daily exercises into play: open your hand over a gem, then close it to grab. <a href="https://mum.magnaven.com" target="_blank" rel="noopener" style="color:#F2D46B;text-decoration:underline">mum.magnaven.com&nbsp;→</a></p></div><div class="m2"><img src="assets/pw-mum-2.gif" alt="A shoulder-lift exercise inside the game" loading="lazy"></div></article>
+    <article class="pw p5 grid"><div class="m"><div class="pulse"><img src="assets/pw-pulse-sit.jpg" alt="A woman sits beside a glowing orb, hand resting on it" loading="lazy"><i style="--x:41%;--y:71%;--r:48%"></i></div></div>
+      <div class="side"><p><b>Pulse.</b> An ongoing study of how rhythmic light, sound and animation shape perception. It began when I noticed that sitting next to a pulsing light felt like being in company. Each object and sculpture has proximity or touch sensors, and answers the person nearby with a pulse.</p></div></article>
+    <article class="pw p6 grid"><div class="m"><div class="pulse"><img src="assets/pw-pulse-orbs.webp" alt="Soft glowing orbs on a rug at dusk, one slowly pulsing" loading="lazy"></div></div>
+      <div class="m2"><div class="pulse"><img src="assets/pw-pulse-hand.jpg" alt="A hand resting on a glowing orb" loading="lazy"><i style="--x:52%;--y:74%;--r:90%;--d:2.1s"></i></div></div></article>
+    <article class="pw p7 grid"><div class="side"><p><b>Prints.</b> A series inspired by giving my fingerprints at border control in different countries. What would happen if every print had a sound?</p></div>
+      <div class="m"><img src="assets/pw-prints.jpg" alt="A music box mechanism playing a paper roll of fingerprints" loading="lazy"></div>
+      <div class="m2"><img src="assets/pw-prints-2.jpg" alt="A fingerprint punched as holes into a paper music roll" loading="lazy"><p>How would a fingerprint turn into notes, and then into music?</p></div></article>
+    <article class="pw p9 grid"><div class="m"><img src="assets/pw-time1.jpg" alt="A woven calendar on the wall, with a brass mechanism unpicking one thread" loading="lazy"><p><b>Time study no. 1.</b> A second-year interaction design brief, answered in thread. Screens and round clocks make time feel endless. This woven calendar is unpicked one thread a day, so you watch the year run out.</p></div>
+      <div class="m2"><img src="assets/pw-time1-detail.jpg" alt="Detail of the brass mechanism pulling a blue thread from the weave" loading="lazy"></div></article>
+    <article class="pw p8 grid"><div class="side"><p><b>Time study no. 2.</b> One year as a single long string, shaped into a dandelion on a kinetic canvas. The mechanism removes one string each day.</p></div>
+      <div class="m"><video src="assets/pw-time2.mp4" poster="assets/pw-time2.jpg" autoplay muted loop playsinline aria-label="One year: 364 wool strands radiating like a dandelion, removed one by one" style="display:block;width:100%;height:auto"></video></div>
+      <div class="m2"><img src="assets/pw-time2-room.jpg" alt="A visitor stands before the large dandelion canvas in a gallery" loading="lazy"></div></article>
+    <article class="pw p10 grid"><div class="m"><img src="assets/pw-kleenex-mirror.jpg" alt="A Kleenex mirror display with the compact tissue box on a plinth" loading="lazy"></div>
+      <div class="m2"><img src="assets/pw-kleenex-board.jpg" alt="A woman using the compact Kleenex box with a built-in mirror" loading="lazy"></div>
+      <div class="side"><p><b>Kleenex compact.</b> A pocket tissue box with a mirror in the lid, for a quick check on the go. Winner of the Innovative Packaging Award.</p></div></article>
+    <article class="pw p11 grid"><div class="m"><img src="assets/pw-2tosit.jpg" alt="Two people facing each other on a long wooden seesaw bench" loading="lazy"></div>
+      <div class="side"><p><b>2 to sit.</b> A study of human interaction, shown at the Istanbul Design Biennale 2018. The seat only works with two people facing each other, so you look up, pay attention and leave your phone alone.</p></div></article>
+  </section>
+
+  <footer class="grid">
+    <div class="c4"><span class="lab">Email</span>idatinker@gmail.com</div>
+    <div class="c4"><span class="lab">Elsewhere</span><a href="https://www.linkedin.com/in/idadilfer/" target="_blank" rel="noopener">LinkedIn</a></div>
+    <div class="c4 clocks"></div>
+  </footer>
+</main>
+
+<!-- ============ ABOUT ============ -->
+<main id="about" class="view">
+  <header class="grid">
+    <div class="c8"><a href="#" class="scr" data-t="Ida Tinker">Ida Tinker</a></div>
+    <nav class="c4 right"><a href="#">Back</a></nav>
+  </header>
+  <div style="height:60px"></div>
+  <section class="about-top grid">
+    <div class="c8 portrait">Portrait</div>
+    <div class="c4 bio">
+      <p>I’m a multidisciplinary designer, artist and educator working across London, Barcelona and Istanbul. I co-founded Magna Ventures and I’m currently designing at Journey Fertility.</p>
+      <div class="links">
+        <span>idatinker@gmail.com</span>
+        <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/in/idadilfer/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+  <section class="cv grid">
+    <div class="c4"><h3>Experience</h3><ul>
+      <li>Journey Fertility<span>Researcher, product designer and brand designer · 2025–Current</span></li>
+      <li>Magna Ventures<span>Co-founder</span></li>
+      <li>Tinkfabrik<span>Co-founder · 2011</span></li>
+      <li>AIDA<span>Lead Product Designer · 2025</span></li>
+      <li>Connectd<span>Lead Product Designer · 2024</span></li>
+      <li>Fidelity International<span>Senior Product Designer</span></li>
+      <li>VCCP<span>Senior Product Designer</span></li>
+      <li>Nexus · BBA · Koffeecup · Field.io<span>Agencies</span></li>
+    </ul></div>
+    <div class="c4"><h3>Education</h3><ul>
+      <li>Istanbul Technical University<span>MA, Design Strategy and Innovation · 2010–2012</span></li>
+      <li>Massachusetts Institute of Technology<span>Entrepreneurship Bootcamp, Business Plan Competition · 2011</span></li>
+      <li>Politècnica de Catalunya<span>Sustainability in Technological Innovation · 2009–2010</span></li>
+      <li>Marmara University<span>BA, Product Design · 2005–2009</span></li>
+    </ul></div>
+    <div class="c4"><h3>Teaching</h3><ul>
+      <li>Istanbul Technical University<span>Guest lecturer, Interaction Design · 2018</span></li>
+      <li>NABA, Milan<span>Workshop: Designing with AI · 2025</span></li>
+      <li>Teenage Engineering<span>Mentor and reviewer, online · 2025</span></li>
+    </ul></div>
+  </section>
+  <section class="cv grid">
+    <div class="c4"><h3>Awards</h3><ul>
+      <li>Innovative Packaging Award<span>Kleenex compact tissue box · <em class="ph">Year</em></span></li>
+      <li>MIT Business Plan Competition<span>Runner-up with Tinkfabrik · 2011</span></li>
+      <li>Turkcell App Competition<span>Best Application Design · 2010</span></li>
+    </ul></div>
+    
+    <div class="c4"><h3>Clients</h3><ul>
+      <li>Fidelity International</li><li>Google</li><li>Unilever</li><li>Spotify</li><li>Facebook</li><li>Mercedes-Benz</li><li>IBM</li>
+    </ul></div>
+    <div class="c4"><h3>Exhibitions</h3><ul>
+      <li>2022 Sep · IN TRANSFER – A New Condition, LU<span>Interactive display of Pulsations</span></li>
+      <li>2020 Sep · Bozar Ars Electronica, BE<span>Interactive display of Pulsations</span></li>
+      <li>2020 Feb · The School of the Future, JP<span>Tokyo Midtown, display of Pulsations</span></li>
+      <li>2018 · Istanbul Design Biennale<span>2 to sit</span></li>
+    </ul></div>
+  </section>
+</main>
+
+<!-- ============ PROJECTS ============ -->
+<main id="journey-fertility" class="view">
+  <header class="grid">
+    <div class="c8"><a href="#" class="scr" data-t="Journey Fertility">Journey Fertility</a></div>
+    <nav class="c4 right"><a href="#">Index</a><a href="#about">About</a></nav>
+  </header>
+  <div style="height:60px"></div>
+  <section class="p-head grid">
+    <div class="c3 yr">2025 – Present<div class="tags"><span>Research</span><span>Product design</span><span>Brand design</span></div></div>
+    <div class="c5"><p>A platform for navigating every part of fertility, for women of all ages. Egg freezing, IVF and hormone checks come first: search clinics and tests, with the full cost shown up front.</p></div>
+    
+  </section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/jf-bento.webp" alt="Journey Fertility brand and product overview" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8 panel one" style="--tint:#F3EFEA"><img src="assets/jf-phone.webp" alt="Hormone test search on mobile" loading="lazy"></div></section>
+  <section class="blk txt grid"><div class="c3"></div><div class="c5"><p>One search replaces ten browser tabs, and every option can be compared side by side.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/jf-search.jpg" alt="Search that starts by asking where you are: egg freezing, IVF, hormone tracking or not sure yet" loading="lazy"></div></section>
+  <section class="blk txt grid"><div class="c3"></div><div class="c5"><p>Brand design: the name, palette, type and voice.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/jf-system.jpg" alt="Journey Fertility design system: colour, type and components" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c4"><img class="sqr" src="assets/jf-story2.jpg" alt="Brand story frame" loading="lazy"></div><div class="c4"><img class="sqr" src="assets/jf-brand.jpg" alt="Brand cards" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/jf-desktop.jpg" alt="Desktop clinic search" loading="lazy"></div></section>
+  <section class="blk grid cs"><div class="c3"></div><div class="c4"><h4>Challenge</h4><p>People arrive looking for very different things, from egg freezing and IVF to early hormone tracking, so sending each one to the right place was hard.</p></div><div class="c4"><h4>How I solved it</h4><p>A search that caters to each group from the very first step, so everyone starts on the path that fits them.</p></div></section>
+  <section class="next grid"><div class="c3"></div><div class="c8"><a href="#letterbird">Next: Letterbird →</a></div></section>
+</main>
+
+<main id="letterbird" class="view">
+  <header class="grid">
+    <div class="c8"><a href="#" class="scr" data-t="Letterbird">Letterbird</a></div>
+    <nav class="c4 right"><a href="#">Index</a><a href="#about">About</a></nav>
+  </header>
+  <div style="height:60px"></div>
+  <section class="p-head grid">
+    <div class="c3 yr">2026<div class="tags"><span>UI design</span><span>Motion design</span></div></div>
+    <div class="c5"><p>A voice journal with no typing. Letterbird calls once a day at a time you choose, asks up to three gentle questions, and keeps what you say as a page in your journal. I designed the UI and the motion kit for the Letterbird team.</p></div>
+    
+  </section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/lb-kit.jpg" alt="Letterbird brand kit: logo, colour and type" loading="lazy"></div></section>
+  <section class="blk txt grid"><div class="c3"></div><div class="c5"><p>Paper and linen for the day, ink for the night call, and one grainy meadow green as the only accent. Hand-drawn lines and an uneven sketch border keep it feeling written, not built.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/lb-setup.jpg" alt="Welcome, choose your questions and set the call time" loading="lazy"></div></section>
+  <section class="blk txt grid"><div class="c3"></div><div class="c5"><p>Setup is three screens: pick your questions, pick the evening, and let it call. If you miss it, it tries once more, then lets the day go.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c4"><img src="assets/lb-calls.webp" alt="Incoming call and on-call screens, animated" loading="lazy"></div><div class="c4"><img src="assets/lb-home.jpg" alt="Welcome screen and the calendar of pages" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/lb-motion.webp" alt="The motion kit: bird in flight, ringing, listening, writing it down, sprig grows, highlight, dusk sky and answer button" loading="lazy"></div></section>
+  <section class="blk txt grid"><div class="c3"></div><div class="c5"><p>Each state of the call has its own motion: sound arcs while it rings, bars that swell while you talk, a scribble while the page is written, and a sprig that grows when it is saved.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/lb-pages.webp" alt="Tucked away, your pages and a single page, animated" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/lb-texture.jpg" alt="Textures, lines and hand-drawn icons" loading="lazy"></div></section>
+  <section class="blk grid cs"><div class="c3"></div><div class="c4"><h4>Challenge</h4><p>Journaling apps ask you to sit down and write, and most people stop within a week.</p></div><div class="c4"><h4>How I solved it</h4><p>Take the writing away. One call a day asks the questions and turns your answers into a page, with no streaks to break, just a calendar that fills as you pick up. Inspired by Granola, the voice chat is turned into text in its own style: your words as a written page, not a transcript.</p></div></section>
+  <section class="next grid"><div class="c3"></div><div class="c8"><a href="#oia">Next: Oia →</a></div></section>
+</main>
+
+<main id="oia" class="view">
+  <header class="grid">
+    <div class="c8"><a href="#" class="scr" data-t="Oia">Oia</a></div>
+    <nav class="c4 right"><a href="#">Index</a><a href="#about">About</a></nav>
+  </header>
+  <div style="height:60px"></div>
+  <section class="p-head grid">
+    <div class="c3 yr">2025<div class="tags"><span>Research</span><span>Product design</span><span>Brand design</span></div></div>
+    <div class="c5"><p>A luxury AI concierge for cosmetic surgery. No forms: patients talk to Oia, and she handles the rest.</p></div>
+    <div class="c3 go" style="grid-column-end:-1"><a href="https://heyoia.com" target="_blank" rel="noopener">heyoia.com &gt;</a></div>
+  </section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/oia-face.webp" alt="Oia maps facial features through the phone" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8 panel" style="--tint:#F6F1EE"><img src="assets/oia-ph-chat.webp" alt="Chat with Oia" loading="lazy"><img src="assets/oia-ph-video.webp" alt="Video note" loading="lazy"><img src="assets/oia-ph-match.webp" alt="Clinic match" loading="lazy"></div></section>
+  <section class="blk txt grid"><div class="c3"></div><div class="c5"><p>The interface is the conversation. Her voice, knowledge and limits were designed as carefully as any screen.</p></div></section>
+  <section class="blk grid intro"><div class="c3 yr">Built with the Oia team</div><div class="c5"><h3>Image engine</h3><p>We also built an image-processing engine. It reads what the patient hopes for, compares their photo uploads with it, and shows suitable results and example after-surgery photos.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c4"><img class="sqr" src="assets/oia-nose.webp" alt="The image engine maps the nose profile and marks what could change" loading="lazy"></div><div class="c4"><div class="panel one" style="--tint:#EFEAE7;aspect-ratio:1/1;padding:6%"><img src="assets/oia-ph-video.webp" alt="Patient uploads a video note" loading="lazy"></div></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/oia-board.webp" alt="Oia brand and product overview" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8 panel" style="--tint:#F6F1EE"><img src="assets/oia-ph-trip.webp" alt="Trip itinerary" loading="lazy"><img src="assets/oia-ph-kit.webp" alt="Recovery kit" loading="lazy"><img src="assets/oia-ph-snap.webp" alt="Recovery snapshot" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c4"><div class="panel one" style="--tint:#EFEAE7;aspect-ratio:1/1;padding:6%"><video src="assets/oia-demo.mp4" poster="assets/oia-demo.jpg" autoplay muted loop playsinline aria-label="Oia app walkthrough"></video></div></div><div class="c4"><img class="sqr" src="assets/oia-visit.jpg" alt="Virtual clinic visit: the surgeon shows the treatment room on a video call" loading="lazy"></div></section>
+  <section class="blk grid cs"><div class="c3"></div><div class="c4"><h4>Challenge</h4><p>Patients need to feel emotionally supported and genuinely safe, and that safety has to be real, not just reassuring words in a chat.</p></div><div class="c4"><h4>How I solved it</h4><p>We studied patient journeys that had gone wrong and designed every step to prevent those failures, so safety is built into the service itself.</p></div></section>
+  <section class="next grid"><div class="c3"></div><div class="c8"><a href="#connectd">Next: Connectd →</a></div></section>
+</main>
+
+<main id="connectd" class="view">
+  <header class="grid">
+    <div class="c8"><a href="#" class="scr" data-t="Connectd">Connectd</a></div>
+    <nav class="c4 right"><a href="#">Index</a><a href="#about">About</a></nav>
+  </header>
+  <div style="height:60px"></div>
+  <section class="p-head grid">
+    <div class="c3 yr">2024<div class="tags"><span>Lead product design</span></div></div>
+    <div class="c5"><p>A marketplace matching startups with the advisors and fractional leaders they need to grow. It launched three-sided, with investors too. My research showed why to drop them, and the leadership team agreed: it is now two-sided.</p></div>
+    <div class="c3 go" style="grid-column-end:-1"><a href="https://connectd.co" target="_blank" rel="noopener">connectd.co &gt;</a></div>
+  </section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/con-hero.webp" alt="Connectd homepage" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c4"><img class="sqr" src="assets/con-117.jpg" alt="Sifted 250, #117 in 2025" loading="lazy"></div><div class="c4"><img class="sqr" src="assets/con-map.jpg" alt="Mapping the user types" loading="lazy"></div></section>
+  <section class="blk txt grid"><div class="c3"></div><div class="c5"><p>Fewer sides, better matches: removing investors let the product focus on startups and advisors, and on trust between them.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/con-messages.jpg" alt="Founder and advisor messaging on laptop and phone" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><video src="assets/con-demo.mp4" poster="assets/con-demo.jpg" autoplay muted loop playsinline aria-label="Connectd product walkthrough"></video></div></section>
+  <section class="blk grid cs"><div class="c3"></div><div class="c4"><h4>Challenge</h4><p>Three user types with different goals made the matching feel noisy. Onboarding and retention numbers were weak, and founders churned soon after signing up.</p></div><div class="c4"><h4>How I solved it</h4><p>Research showed investors diluted the experience, so we cut to two sides and rebuilt onboarding around startup–advisor fit: an educational onboarding inspired by Airbnb, with ongoing in-product support.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/con-dashboard.jpg" alt="Connectd dashboard" loading="lazy"></div></section>
+  <section class="next grid"><div class="c3"></div><div class="c8"><a href="#google-home">Next: Google Home skins →</a></div></section>
+</main>
+
+<main id="google-home" class="view">
+  <header class="grid">
+    <div class="c8"><a href="#" class="scr" data-t="Google Home skins">Google Home skins</a></div>
+    <nav class="c4 right"><a href="#">Index</a><a href="#about">About</a></nav>
+  </header>
+  <div style="height:60px"></div>
+  <section class="p-head grid">
+    <div class="c3 yr">2025 · Google Labs<div class="tags"><span>Product design</span><span>Interaction design</span><span>Character design</span></div></div>
+    <div class="c5"><p>Skins that give Google Home a character. Inspired by the dancing flower toys of the 80s and today’s solar window-sill flowers: say “Hey Google” and they open their eyes; play music and they keep moving.</p></div>
+    
+  </section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/gh-owl.webp" alt="The owl skin wakes when you say Hey Google" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8" style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut)"><img src="assets/gh-owl-0.jpg" alt="Asleep" loading="lazy"><img src="assets/gh-owl-1.jpg" alt="Waking" loading="lazy"><img src="assets/gh-owl-2.jpg" alt="Listening" loading="lazy"></div></section>
+  <section class="blk txt grid"><div class="c3"></div><div class="c5"><p>Asleep, waking, listening: three states that tell you when the speaker is paying attention.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/gh-sprout.webp" alt="The sprout skin for Nest Mini wakes up" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8" style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gut)"><img src="assets/gh-sprout-0.jpg" alt="Asleep" loading="lazy"><img src="assets/gh-sprout-1.jpg" alt="Waking" loading="lazy"><img src="assets/gh-sprout-2.jpg" alt="Listening" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/gh-flower.jpg" alt="The flower skin, closed and in bloom" loading="lazy"></div></section>
+  <section class="blk grid cs"><div class="c3"></div><div class="c4"><h4>Challenge</h4><p>Give Google Home speakers a different, cuter way to interact, for kids and kids at heart.</p></div><div class="c4"><h4>How I solved it</h4><p>Characters inspired by the sensor-activated dancing flower toys of the 80s: they wake when you speak to them and move along to the music.</p></div></section>
+  <section class="next grid"><div class="c3"></div><div class="c8"><a href="#vccp">Next: VCCP Good Works →</a></div></section>
+</main>
+
+<main id="vccp" class="view">
+  <header class="grid">
+    <div class="c8"><a href="#" class="scr" data-t="VCCP Good Works">VCCP Good Works</a></div>
+    <nav class="c4 right"><a href="#">Index</a><a href="#about">About</a></nav>
+  </header>
+  <div style="height:60px"></div>
+  <section class="p-head grid">
+    <div class="c3 yr">Vitality · Pension Buddy · The Cambridge<div class="tags"><span>Senior product design</span><span>Design systems</span><span>Accessibility</span></div></div>
+    <div class="c5"><p>Health and finance platforms used by millions, made clearer and more accessible across three regulated brands.</p></div>
+    
+  </section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/vccp-goodworks.jpg" alt="VCCP Good Works" loading="lazy"></div></section>
+  <section class="blk grid intro"><div class="c3 yr">Health and life insurance</div><div class="c5"><h3>Vitality</h3><p>I improved Vitality’s design component library and made accessibility improvements across its adviser pages.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/vccp-vitality.jpg" alt="Vitality adviser pages" loading="lazy"></div></section>
+  <section class="blk txt grid"><div class="c3"></div><div class="c5"><p>One shared component library, built to WCAG 2.1 AA, carried across every brand.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/vccp-cambridge-full.jpg" alt="The Cambridge Building Society savings page" loading="lazy"></div></section>
+  <section class="blk grid intro"><div class="c3 yr">Brand · Design system</div><div class="c5"><h3>Pension Buddy</h3><p>Brand and design system for Pension Buddy, from page templates to article pages.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/vccp-buddy-templates.jpg" alt="Pension Buddy page templates" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/vccp-buddy.jpg" alt="Pension Buddy article page" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/vccp-fidelity.jpg" alt="Fidelity International homepage" loading="lazy"></div></section>
+  <section class="blk grid cs"><div class="c3"></div><div class="c4"><h4>Challenge</h4><p>Three regulated brands, each with inconsistent components and pages that failed accessibility checks.</p></div><div class="c4"><h4>How I solved it</h4><p>A shared component library built to WCAG 2.1 AA, rolled out across Vitality, Pension Buddy and The Cambridge.</p></div></section>
+  <section class="next grid"><div class="c3"></div><div class="c8"><a href="#experiential">Next: Experiential Design →</a></div></section>
+</main>
+
+<main id="experiential" class="view">
+  <header class="grid">
+    <div class="c8"><a href="#" class="scr" data-t="Experiential Design">Experiential Design</a></div>
+    <nav class="c4 right"><a href="#">Index</a><a href="#about">About</a></nav>
+  </header>
+  <div style="height:60px"></div>
+  <section class="p-head grid">
+    <div class="c3 yr">2018 – 2019<br>Facebook · Spotify · IBM · Mazda<div class="tags"><span>Experience design</span><span>Interaction design</span></div></div>
+    <div class="c5"><p>Physical and interactive experiences for global brands: installations, events and retail spaces, with stories visitors can experience.</p></div>
+    
+  </section>
+  <section class="blk grid intro"><div class="c3 yr">Davos 2018<br>Installation</div><div class="c5"><h3>Facebook</h3><p>A glass-paneled light installation for the atrium. Visitors played light animations across the frosted acrylic panels from a touchscreen kiosk below, each one telling a data story from Facebook.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/exp-fb-render.jpg" alt="Facebook Davos installation render" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c4"><img class="sqr" src="assets/exp-fb-build.jpg" alt="Building the installation" loading="lazy"></div><div class="c4"><img class="sqr" src="assets/exp-fb-test1.jpg" alt="Testing the panels" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c4"><img class="sqr" src="assets/exp-fb-test2.jpg" alt="Panel test" loading="lazy"></div><div class="c4"><img class="sqr" src="assets/exp-fb-test3.jpg" alt="Panel test" loading="lazy"></div></section>
+  <section class="blk grid intro"><div class="c3 yr">Cannes Lions 2019<br>Interactive experience</div><div class="c5"><h3>Spotify</h3><p>An AI playlist-name generator, inspired by Janelle Shane’s neural-network band names. Visitors answered a few questions and left with their playlist name printed on a T-shirt.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/exp-sp-space.jpg" alt="Spotify recharge space at Cannes Lions" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/exp-sp-ui.jpg" alt="Playlist name generator on tablets" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c4"><img src="assets/exp-sp-tee1.jpg" alt="Printed playlist T-shirts" loading="lazy"></div><div class="c4"><img src="assets/exp-sp-tee2.jpg" alt="Printed playlist T-shirts" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/exp-sp-onair.jpg" alt="Spotify On Air studio" loading="lazy"></div></section>
+  <section class="blk grid intro"><div class="c3 yr">NRF 2020, New York<br>With George P Johnson</div><div class="c5"><h3>IBM Dreamstore</h3><p>Visitors placed RFID-tagged ceramic objects on a reader, built their dream store on a touchscreen, and watched it come together on the display beside them.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><div class="panel one" style="--tint:#1b1b1b;padding:5%"><img src="assets/exp.webp" alt="IBM Dreamstore kiosk" loading="lazy" style="max-height:520px"></div></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c4"><img src="assets/exp-ibm-map.jpg" alt="Choose a region" loading="lazy"></div><div class="c4"><img src="assets/exp-ibm-caps.jpg" alt="Choose store capabilities" loading="lazy"></div></section>
+  <section class="blk grid intro"><div class="c3 yr">2019<br>Touring brand experience</div><div class="c5"><h3>Mazda Experience</h3><p>A touring pavilion that took visitors into Mazda’s world of craftsmanship and the human touch behind every car.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/exp-mz-render.jpg" alt="Mazda Experience pavilion render" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/exp-mz-front.jpg" alt="The Driving Room entrance" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c4"><img class="sqr" src="assets/exp-mz-plan.jpg" alt="Site plan" loading="lazy"></div><div class="c4"><img class="sqr" src="assets/exp-mz-booth.jpg" alt="Experience Together booth" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c4"><img class="sqr" src="assets/exp-mz-tools.jpg" alt="Craft tools display" loading="lazy"></div><div class="c4"><img class="sqr" src="assets/exp-mz-art.jpg" alt="Car as Art" loading="lazy"></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/exp-mz-sketch.jpg" alt="Design sketches" loading="lazy"></div></section>
+  <section class="blk grid cs"><div class="c3"></div><div class="c4"><h4>Challenge</h4><p>Brands wanted people to remember a message after a crowded event, not just walk past a stand.</p></div><div class="c4"><h4>How I solved it</h4><p>Physical, playful interactions: people touch, choose and take something home, so the brand story stays with them.</p></div></section>
+  <section class="next grid"><div class="c3"></div><div class="c8"><a href="#tinkfabrik">Next: Tinkfabrik →</a></div></section>
+</main>
+
+<main id="tinkfabrik" class="view">
+  <header class="grid">
+    <div class="c8"><a href="#" class="scr" data-t="Tinkfabrik">Tinkfabrik</a></div>
+    <nav class="c4 right"><a href="#">Index</a><a href="#about">About</a></nav>
+  </header>
+  <div style="height:60px"></div>
+  <section class="p-head grid">
+    <div class="c3 yr">2011<div class="tags"><span>Co-founder</span><span>Product strategy</span><span>Brand design</span></div></div>
+    <div class="c5"><p>A platform connecting designers and FMCG companies to solve sustainability challenges through co-creation. Runner-up at the MIT Business Plan Competition 2011, backed by Revo Capital and Hüsnü Özyeğin.</p></div>
+    
+  </section>
+  <section class="blk grid"><div class="c3"></div><div class="c4"><img class="sqr" src="assets/tf-logo.jpg" alt="Tinkfabrik logo" loading="lazy"></div><div class="c4"><div class="panel one" style="--tint:#F2F2F0;aspect-ratio:1/1;padding:6%"><img src="assets/tf-press.jpg" alt="Press coverage with Hüsnü Özyeğin and Özcan Tahincioğlu" loading="lazy"></div></div></section>
+  <section class="blk txt grid"><div class="c3"></div><div class="c5"><p>Built from zero: I led product strategy, launched the web app, defined the brand and grew a community of 1,100+ designers.</p></div></section>
+  <section class="blk grid"><div class="c3"></div><div class="c8"><img src="assets/tf-feed.jpg" alt="Tinkfabrik discovery feed" loading="lazy"></div></section>
+  <section class="blk txt grid"><div class="c3"></div><div class="c5"><p>I managed in-house teams across UX, engineering, industrial design and QA, and built relationships with investors and brand partners.</p></div></section>
+  <section class="blk grid cs"><div class="c3"></div><div class="c4"><h4>Challenge</h4><p>Designers had ideas for sustainability, and FMCG brands had the problems, but there was no way to bring them together.</p></div><div class="c4"><h4>How I solved it</h4><p>A co-creation platform where brands post real challenges and a community of 1,100+ designers answers them.</p></div></section>
+  <section class="next grid"><div class="c3"></div><div class="c8"><a href="#journey-fertility">Next: Journey Fertility →</a></div></section>
+</main>
+
+<script>
+(function(){
+  // routing
+  const views=[...document.querySelectorAll('.view')];
+  function route(){
+    const id=(location.hash||'#home').slice(1)||'home';
+    const v=document.getElementById(id)&&document.getElementById(id).classList.contains('view')?id:'home';
+    views.forEach(el=>el.classList.toggle('on',el.id===v));
+    window.scrollTo(0,0);
+    const h=document.querySelector('#'+v+' .scr'); if(h) scramble(h);
+  }
+  addEventListener('hashchange',route);
+
+  // name scramble, like the reference
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const chars='abcdefghijklmnopqrstuvwxyz#%&*';
+  const hues=['#1F5BFF','#FFC400','#FF2A1F'];
+  const esc=c=>c==='&'?'&amp;':c==='<'?'&lt;':c;
+  function scramble(el){
+    const t=el.dataset.t; if(reduce){el.textContent=t;return}
+    if(el._run) return; el._run=true; let f=0;
+    el._i=setInterval(()=>{
+      el.innerHTML=t.split('').map((c,i)=>{
+        if(c===' '||i<f/2) return esc(c);
+        const col=hues[Math.random()*3|0];
+        if(Math.random()<.55) return '<i class="sh sh'+(Math.random()*3|0)+'" style="background:'+col+'"></i>';
+        return '<span style="color:'+col+'">'+esc(chars[Math.random()*chars.length|0])+'</span>';
+      }).join('');
+      if(++f>t.length*2){clearInterval(el._i);el.textContent=t;el._run=false}
+    },35);
+  }
+  document.querySelectorAll('header nav a').forEach(a=>{a.classList.add('scr');a.dataset.t=a.textContent.trim()});
+  document.querySelectorAll('.scr').forEach(el=>el.addEventListener('mouseenter',()=>scramble(el)));
+
+  // clocks
+  const zones=[['BCN','Europe/Madrid'],['LDN','Europe/London'],['IST','Europe/Istanbul']];
+  const box=document.querySelector('.clocks');
+  function tick(){
+    box.innerHTML=zones.map(([k,z])=>'<div><span class="lab">'+k+'</span>'+new Date().toLocaleTimeString('en-GB',{timeZone:z,hour:'2-digit',minute:'2-digit'})+'</div>').join('');
+  }
+  tick(); setInterval(tick,15000);
+  route();
+})();
+</script>
+</body>
+</html>
