@@ -106,7 +106,8 @@
   .p4 .m{grid-column:1/5}.p4 .m2{grid-column:6/9;margin-top:120px}
   @media (max-width:820px){
     .personal{padding-block:40px 60px}
-    .p1 .m,.p2 .m,.p2 .side,.p3 .m,.p4 .m,.p1 .m2,.p4 .m2,.p5 .m,.p5 .side,.p6 .m,.p6 .m2,.p7 .m,.p7 .m2,.p7 .side,.p8 .m,.p8 .m2,.p8 .side,.p9 .m,.p9 .m2,.p10 .m,.p10 .m2,.p10 .side,.p11 .m,.p11 .side,.p12 .m,.p12 .m2,.p12 .m3,.p12 .side{grid-column:1/-1;margin-top:0}
+    .p1 .m,.p2 .m,.p2 .side,.p3 .m,.p4 .m,.p1 .m2,.p4 .m2,.p5 .m,.p5 .side,.p6 .m,.p6 .m2,.p7 .m,.p7 .m2,.p7 .side,.p8 .m,.p8 .m2,.p8 .side,.p9 .m,.p9 .m2,.p10 .m,.p10 .m2,.p10 .side,.p11 .m,.p11 .side,.p12 .m,.p12 .m2,.p12 .m3,.p12 .side,.p13 .m,.p13 .side,.p14 .m,.p14 .m2,.p14 .side{grid-column:1/-1;margin-top:0}
+    .p13 .m,.p14 .m2,.p14 .side{margin-top:18px}
     .p12 .m2,.p12 .m3{margin-top:18px}
     .p11 .side{margin-top:18px}
     .p10 .m2{margin-top:18px}
@@ -132,7 +133,16 @@
   .p10 .m{grid-column:1/4}.p10 .m2{grid-column:5/13}.p10 .side{grid-column:5/10;margin-top:22px}
   .p11 .m{grid-column:3/12}.p11 .side{grid-column:3/8;margin-top:22px}
   .p12 .m{grid-column:1/5}.p12 .m2{grid-column:5/9;margin-top:90px}.p12 .m3{grid-column:9/13;margin-top:30px}.p12 .side{grid-column:5/10;margin-top:26px}
+  .p13 .side{grid-column:2/6;align-self:start}.p13 .m{grid-column:6/13}
+  .p14 .m{grid-column:1/8}.p14 .m2{grid-column:9/13;margin-top:110px}.p14 .side{grid-column:2/8;margin-top:22px}
+  .pw .play{color:#F2D46B;text-decoration:underline}
   .p6 .m{grid-column:1/6}.p6 .m2{grid-column:7/11;margin-top:160px}
+  .pw .side p+p{margin-top:18px}
+  @media (max-width:820px){
+    .pw>div{grid-column:1/-1!important;margin-top:18px!important}
+    .pw>div:first-child{margin-top:0!important}
+    .pw .side{order:0}
+  }
   .blk.intro{padding-block:70px 26px;font-size:13px;line-height:1.45;align-items:baseline}
   .blk.intro h3{font-size:19px;font-weight:500;margin:0 0 10px}
   .blk.intro p{margin:0;max-width:34em}
@@ -228,6 +238,11 @@
   <section class="personal" id="personal">
     <div class="mark"><span>//</span><span>Personal works</span></div>
     <article class="pw p1 grid"><div class="m"><img src="assets/pw-mum-1.gif" alt="The game finds the player's face and hand through the camera" loading="lazy"><p><b>A game for Mum.</b> I built this for my mum, who has Parkinson's. Hand and face tracking turn her daily exercises into play: open your hand over a gem, then close it to grab. <a href="https://mum.magnaven.com" target="_blank" rel="noopener" style="color:#F2D46B;text-decoration:underline">mum.magnaven.com&nbsp;→</a></p></div><div class="m2"><img src="assets/pw-mum-2.gif" alt="A shoulder-lift exercise inside the game" loading="lazy"></div></article>
+    <article class="pw p13 grid"><div class="side"><p><b>Games.</b> I’ve loved interactive art since studying design, and games are its best form. I build one when I get possessed by a vision, usually a new way for people to enjoy visual art.</p><p><b>Primordial.</b> Feed a single atom the universe until it bursts into a Big Bang. Drag a filament out from the atom, slice through drifting matter, and keep clear of the dark matter that cuts the line. <a class="play" href="https://primordial.magnaven.com" target="_blank" rel="noopener">primordial.magnaven.com&nbsp;→</a></p></div>
+      <div class="m"><img src="../pw-primordial.webp" alt="Primordial: a glowing atom on a grainy black field, a filament reaching out to drifting matter" loading="lazy"></div></article>
+    <article class="pw p14 grid"><div class="m"><img src="../pw-lily.webp" alt="Lilypad Leap: pulling back to aim, the frog leaps from pad to pad as the bullfrog wakes" loading="lazy"></div>
+      <div class="m2"><img src="../pw-lily-cover.jpg" alt="Lilypad Leap: the frog on a lily pad with flies drifting over the pond" loading="lazy"></div>
+      <div class="side"><p><b>Lilypad Leap.</b> Pull back, read the arc and time the leap, so the frog snaps a fly mid-air and lands on a lily pad. Five ponds, from Morning Pond to Thunderstorm, with a bullfrog on your trail. <a class="play" href="https://lily.magnaven.com" target="_blank" rel="noopener">lily.magnaven.com&nbsp;→</a></p></div></article>
     <article class="pw p5 grid"><div class="m"><div class="pulse"><img src="assets/pw-pulse-sit.jpg" alt="A woman sits beside a glowing orb, hand resting on it" loading="lazy"><i style="--x:41%;--y:71%;--r:48%"></i></div></div>
       <div class="side"><p><b>Pulse.</b> An ongoing study of how rhythmic light, sound and animation shape perception. It began when I noticed that sitting next to a pulsing light felt like being in company. Each object and sculpture has proximity or touch sensors, and answers the person nearby with a pulse.</p></div></article>
     <article class="pw p6 grid"><div class="m"><div class="pulse"><img src="assets/pw-pulse-orbs.webp" alt="Soft glowing orbs on a rug at dusk, one slowly pulsing" loading="lazy"></div></div>
